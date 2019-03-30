@@ -16,8 +16,10 @@ class App extends React.Component {
   }
 
   get() {
+    let id = Math.floor(Math.random() * 50) + 1;
+    console.log(id);
     axios
-      .get(`/api/photos/${this.props.id}`)
+      .get(`/api/photos/${id}`)
       .then(data => {
         this.setState({
           imageList: data.data[0].urls
@@ -28,9 +30,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <img src={this.state.imageList[0]} className="mainPic" />
-        <List imageList={this.state.imageList.slice(1)} />
+        <div className="grid">
+          <div className="picCol">
+            <List imageList={this.state.imageList.slice(1, 3)} />
+          </div>
+          <div className="picCol2">
+            <List imageList={this.state.imageList.slice(3)} />
+          </div>
+        </div>
       </div>
     );
   }
