@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const ListEntry = (props) => {
+const ListEntry = props => {
   return (
     <div>
-      <img />
+      <img src={props.pic} className="listPic" />
     </div>
-  )
-}
+  );
+};
 
 export default ListEntry;

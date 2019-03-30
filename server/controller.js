@@ -1,6 +1,13 @@
+const db = require('../database/index.js')
+
 const controller = {
   get: (req, res) => {
-    res.send('get works')
+    db
+      .find({
+        id: req.params.id
+      })
+      .then(data => res.status(200).send(data))
+      .catch(err => res.status(404).send(err))
   }
 }
 
