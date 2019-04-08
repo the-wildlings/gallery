@@ -28,7 +28,7 @@ export default class Slideshow extends Component {
 
   render() {
     return (
-      <Modal {...this.props} size="xl">
+      <Modal {...this.props} size="lg">
         <Modal.Header closeButton />
         <Carousel
           showIndicators={false}

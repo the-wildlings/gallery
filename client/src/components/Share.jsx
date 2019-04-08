@@ -92,7 +92,7 @@ export default class Share extends Component {
           </p>
           <hr />
           <img
-            src="https://s3-us-west-1.amazonaws.com/sharebnbicons/copy+link+icon.png"
+            src="https://s3-us-west-1.amazonaws.com/sharebnbicons/copy+icon.png"
             id="gallery-copyIcon"
           />
           <p
@@ -105,7 +105,7 @@ export default class Share extends Component {
           </p>
           <hr />
           <img
-            src="https://s3-us-west-1.amazonaws.com/sharebnbicons/embed+icon.png"
+            src="https://s3-us-west-1.amazonaws.com/sharebnbicons/new+embed.png"
             id="gallery-embedIcon"
           />
           <p
