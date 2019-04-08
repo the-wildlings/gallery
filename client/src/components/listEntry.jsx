@@ -1,11 +1,7 @@
 import React from "react";
 
 const ListEntry = props => {
-  return (
-    <div>
-      <img src={props.pic} className="listPic" />
-    </div>
-  );
+  return <img src={props.pic} className={"gallery-listPic" + props.index} />;
 };
 
 export default ListEntry;
