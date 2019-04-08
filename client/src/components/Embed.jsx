@@ -52,9 +52,9 @@ export default class Embed extends Component {
   toggleBoxes(e) {
     e.target.classList.toggle("gallery-uparrow");
     console.log(e.target.classList);
-    // this.setState({
-    //   showBoxes: !this.state.showBoxes
-    // });
+    this.setState({
+      showBoxes: !this.state.showBoxes
+    });
   }
 
   render() {

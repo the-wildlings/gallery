@@ -26,7 +26,7 @@ export default class Save extends Component {
 
   render() {
     return (
-      <Modal {...this.props}>
+      <Modal {...this.props} id="gallery-saveModal">
         <Modal.Body>
           <img
             src="https://s3-us-west-1.amazonaws.com/sharebnbicons/close+icon.png"
