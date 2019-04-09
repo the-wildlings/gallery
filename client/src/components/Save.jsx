@@ -33,7 +33,7 @@ export default class Save extends Component {
             className="gallery-closeIcon"
             onClick={this.props.onHide}
           />
-          <h4 className="gallery-modalTitle">Save to List</h4>
+          <h4 className="gallery-modalTitle">Save to list</h4>
           <p>Name</p>
           <input onChange={this.handleChange} id="gallery-saveInput" />
           <br />

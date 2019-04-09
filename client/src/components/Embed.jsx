@@ -65,8 +65,8 @@ export default class Embed extends Component {
             <div id="gallery-embedLeft">
               <img
                 src="https://s3-us-west-1.amazonaws.com/sharebnbicons/close+icon.png"
-                className="gallery-closeIcon"
                 onClick={this.props.onHide}
+                className="gallery-closeIcon"
               />
               <h4 className="gallery-modalTitle" id="gallery-embedTitle">
                 Embed this home
