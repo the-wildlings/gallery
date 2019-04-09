@@ -26,8 +26,8 @@ export default class Save extends Component {
 
   render() {
     return (
-      <Modal {...this.props}>
-        <Modal.Body>
+      <Modal {...this.props} size="lg">
+        <Modal.Body id="gallery-saveModal">
           <img
             src="https://s3-us-west-1.amazonaws.com/sharebnbicons/close+icon.png"
             className="gallery-closeIcon"
@@ -35,17 +35,22 @@ export default class Save extends Component {
           />
           <h4 className="gallery-modalTitle">Save to List</h4>
           <p>Name</p>
-          <input onChange={this.handleChange} />
-          <Button variant="secondary" onClick={this.props.onHide}>
-            Cancel
-          </Button>
-          {this.state.input ? (
-            <Button variant="primary" className="gallery-colored">
-              Create
-            </Button>
-          ) : (
-            <Button className="gallery-faded">Create</Button>
-          )}
+          <input onChange={this.handleChange} id="gallery-saveInput" />
+          <br />
+          <div id="gallery-buttonHolderHolder">
+            <div id="gallery-buttonHolder">
+              <Button onClick={this.props.onHide} id="gallery-cancelButton">
+                Cancel
+              </Button>
+              {this.state.input ? (
+                <Button id="gallery-createButton">Create</Button>
+              ) : (
+                <Button id="gallery-faded" disabled>
+                  Create
+                </Button>
+              )}
+            </div>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <p>TODO</p>
