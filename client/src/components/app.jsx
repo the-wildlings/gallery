@@ -17,8 +17,8 @@ class App extends React.Component {
       reviews: Math.round(Math.random() * 400) + 50,
       showSS: false,
       showShare: false,
-      showSave: false,
-      showEmbed: true,
+      showSave: true,
+      showEmbed: false,
       SSstart: 0
     };
     this.get = this.get.bind(this);
@@ -109,7 +109,14 @@ class App extends React.Component {
           start={this.state.SSstart}
           transition={this.SStransition}
         />
-        <Save show={this.state.showSave} onHide={saveClose} />
+        <Save
+          show={this.state.showSave}
+          onHide={saveClose}
+          name={this.state.name}
+          location={this.state.location}
+          reviews={this.state.reviews}
+          pic={this.state.imageList[0]}
+        />
         <Embed
           show={this.state.showEmbed}
           onHide={embedClose}

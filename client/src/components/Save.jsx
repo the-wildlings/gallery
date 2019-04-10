@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Review from "./Review.jsx";
 
 export default class Save extends Component {
   constructor(props) {
@@ -54,11 +55,18 @@ export default class Save extends Component {
                 </Button>
               )}
             </div>
+            <div id="gallery-saveWhiteSpace" />
           </div>
+          <Review
+            name={this.props.name}
+            pic={this.props.pic}
+            location={this.props.location}
+            reviews={this.props.reviews}
+            className="gallery-reviewComp"
+            id="gallery-saveReview"
+            textId="gallery-saveReviewText"
+          />
         </Modal.Body>
-        <Modal.Footer>
-          <p>TODO</p>
-        </Modal.Footer>
       </Modal>
     );
   }
