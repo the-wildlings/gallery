@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Review from "./Review.jsx";
 
 export default class Embed extends Component {
   constructor(props) {
@@ -26,12 +28,14 @@ export default class Embed extends Component {
       showBoxes: false,
       price: false,
       reviews: false,
-      links: false
+      links: false,
+      index: 0
     };
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.toggleBoxes = this.toggleBoxes.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   handleMouseEnter(e) {
@@ -50,11 +54,34 @@ export default class Embed extends Component {
   }
 
   toggleBoxes(e) {
-    e.target.classList.toggle("gallery-uparrow");
-    console.log(e.target.classList);
+    e.target.classList.toggle("gallery-flipped");
     this.setState({
       showBoxes: !this.state.showBoxes
     });
+  }
+
+  handleItemClick(e, negative) {
+    if (negative) {
+      if (this.state.index === 0) {
+        this.setState({
+          index: this.props.images.length - 1
+        });
+      } else {
+        this.setState({
+          index: this.state.index - 1
+        });
+      }
+    } else {
+      if (this.state.index === this.props.images.length - 1) {
+        this.setState({
+          index: 0
+        });
+      } else {
+        this.setState({
+          index: this.state.index + 1
+        });
+      }
+    }
   }
 
   render() {
@@ -158,7 +185,58 @@ export default class Embed extends Component {
                 <div id="gallery-whiteSpace" />
               )}
             </div>
-            <div id="gallery-embedRight">'temp'</div>
+            <div id="gallery-embedRight">
+              <div id="gallery-embedSScontainer">
+                <div id="gallery-preview">
+                  <span id="gallery-previewText">PREVIEW</span>
+                </div>
+                <img
+                  src="https://s3-us-west-1.amazonaws.com/sharebnbicons/opaque+heart.png"
+                  id="gallery-embedLikeIcon"
+                />
+                <img
+                  id="gallery-embedLeftArrow"
+                  src="https://s3-us-west-1.amazonaws.com/sharebnbicons/left+arrow.png"
+                  onClick={e => this.handleItemClick(e, true)}
+                />
+                <Carousel
+                  showArrows={false}
+                  showThumbs={false}
+                  showStatus={false}
+                  showIndicators={false}
+                  showThumbs={false}
+                  infiniteLoop={true}
+                  selectedItem={this.state.index}
+                  width="100%"
+                  height="100%"
+                  transitionTime={40}
+                  swipeable={false}
+                >
+                  {this.props.images.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <img src={item} className="gallery-embedSSpic" />
+                      </div>
+                    );
+                  })}
+                </Carousel>
+                <img
+                  id="gallery-embedRightArrow"
+                  src="https://s3-us-west-1.amazonaws.com/sharebnbicons/left+arrow.png"
+                  onClick={this.handleItemClick}
+                />
+                <div>
+                  <Review
+                    pic={this.props.pic}
+                    name={this.props.name}
+                    location={this.props.location}
+                    reviews={this.props.reviews}
+                    bottom={true}
+                    className="gallery-reviewComp"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </Modal.Body>
       </Modal>

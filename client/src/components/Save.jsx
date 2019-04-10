@@ -26,7 +26,7 @@ export default class Save extends Component {
 
   render() {
     return (
-      <Modal {...this.props} size="lg">
+      <Modal {...this.props}>
         <Modal.Body id="gallery-saveModal">
           <img
             src="https://s3-us-west-1.amazonaws.com/sharebnbicons/close+icon.png"
@@ -35,7 +35,11 @@ export default class Save extends Component {
           />
           <h4 className="gallery-modalTitle">Save to list</h4>
           <p>Name</p>
-          <input onChange={this.handleChange} id="gallery-saveInput" />
+          <input
+            onChange={this.handleChange}
+            id="gallery-saveInput"
+            placeholder="  Name your list"
+          />
           <br />
           <div id="gallery-buttonHolderHolder">
             <div id="gallery-buttonHolder">

@@ -12,10 +12,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       imageList: [],
+      name: "TEMP TEST",
+      location: "LOCATION TEMP",
+      reviews: Math.round(Math.random() * 400) + 50,
       showSS: false,
       showShare: false,
       showSave: false,
-      showEmbed: false,
+      showEmbed: true,
       SSstart: 0
     };
     this.get = this.get.bind(this);
@@ -48,7 +51,6 @@ class App extends React.Component {
   }
 
   SStransition(e) {
-    console.log(e);
     this.setState({
       SSstart: e
     });
@@ -108,7 +110,14 @@ class App extends React.Component {
           transition={this.SStransition}
         />
         <Save show={this.state.showSave} onHide={saveClose} />
-        <Embed show={this.state.showEmbed} onHide={embedClose} />
+        <Embed
+          show={this.state.showEmbed}
+          onHide={embedClose}
+          images={this.state.imageList}
+          name={this.state.name}
+          location={this.state.location}
+          reviews={this.state.reviews}
+        />
         <Share
           show={this.state.showShare}
           onHide={shareClose}

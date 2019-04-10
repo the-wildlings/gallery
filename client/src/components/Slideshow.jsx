@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ArrowKeysReact from "arrow-keys-react";
 
 export default class Slideshow extends Component {
   constructor(props, context) {
@@ -11,6 +12,10 @@ export default class Slideshow extends Component {
       index: this.props.start
     };
     this.handleItemClick = this.handleItemClick.bind(this);
+    ArrowKeysReact.config({
+      left: () => console.log("left"),
+      right: () => console.log("right")
+    });
   }
 
   handleItemClick(e, negative) {
@@ -38,8 +43,14 @@ export default class Slideshow extends Component {
   }
 
   render() {
+    // console.log(ArrowKeysReact.events);
     return (
-      <Modal {...this.props} size="xl" id="gallery-SSmodalBody">
+      <Modal
+        {...this.props}
+        size="xl"
+        id="gallery-SSmodalBody"
+        onKeyPress={charCode => console.log(charCode)}
+      >
         <div id="gallery-SScontainer">
           <img
             id="gallery-leftArrow"
@@ -58,7 +69,6 @@ export default class Slideshow extends Component {
             onClickItem={e => this.handleItemClick(e, false)}
             width="100%"
             height="100%"
-            useKeyboardArrows={true}
             transitionTime={40}
             swipeable={false}
             onChange={this.props.transition}
