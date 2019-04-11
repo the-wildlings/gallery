@@ -66,7 +66,7 @@ class App extends React.Component {
         showSS: true
       });
     } else {
-      let index = parseInt(className[className.length - 1]);
+      let index = parseInt(className[className.length - 1]) + 1;
       this.setState({
         SSstart: index,
         showSS: true
