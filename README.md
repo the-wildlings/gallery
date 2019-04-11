@@ -22,6 +22,7 @@ ShareBNB App
 Npm Install
 Npm Run Build
 Npm Start
+Node database/seed.js
 ```
 
 ## Requirements

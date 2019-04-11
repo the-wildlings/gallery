@@ -12,8 +12,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       imageList: [],
-      name: "TEMP TEST",
-      location: "LOCATION TEMP",
+      name: "",
+      location: "",
       reviews: Math.round(Math.random() * 400) + 50,
       showSS: false,
       showShare: false,
@@ -39,7 +39,9 @@ class App extends React.Component {
       .get(`/api/photos/${id}`)
       .then(data => {
         this.setState({
-          imageList: data.data[0].urls
+          imageList: data.data[0].urls,
+          location: data.data[0].location + ", CA, United States",
+          name: data.data[0].title
         });
       })
       .catch(err => console.error(err));

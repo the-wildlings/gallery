@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Review from "./Review.jsx";
@@ -135,7 +134,11 @@ export default class Embed extends Component {
                       }
                       onClick={this.handleCheck}
                       id="price"
-                    />{" "}
+                    >
+                      {this.state.price ? (
+                        <span id="gallery-check">&#10004;</span>
+                      ) : null}
+                    </div>{" "}
                     Hide the price
                   </label>
                   <br />
@@ -174,7 +177,11 @@ export default class Embed extends Component {
                       }
                       onClick={this.handleCheck}
                       id="links"
-                    />{" "}
+                    >
+                      {this.state.links ? (
+                        <span id="gallery-check">&#10004;</span>
+                      ) : null}
+                    </div>{" "}
                     Create "no follow" links
                   </label>
                 </form>
@@ -201,7 +208,6 @@ export default class Embed extends Component {
                   showThumbs={false}
                   showStatus={false}
                   showIndicators={false}
-                  showThumbs={false}
                   infiniteLoop={true}
                   selectedItem={this.state.index}
                   width="100%"

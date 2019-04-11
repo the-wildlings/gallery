@@ -15,6 +15,12 @@ let GallerySchema = mongoose.Schema({
     type: Number,
     unique: true,
   },
+  location: {
+    type: String
+  },
+  title: {
+    type: String
+  },
   urls: {
     type: [String]
   }
