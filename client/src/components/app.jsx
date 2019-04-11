@@ -17,13 +17,15 @@ class App extends React.Component {
       reviews: Math.round(Math.random() * 400) + 50,
       showSS: false,
       showShare: false,
-      showSave: true,
+      showSave: false,
       showEmbed: false,
       SSstart: 0
     };
     this.get = this.get.bind(this);
     this.embedClick = this.embedClick.bind(this);
     this.SStransition = this.SStransition.bind(this);
+    this.handleDoubleCLick = this.handleDoubleCLick.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +58,45 @@ class App extends React.Component {
     });
   }
 
-  //TODO add double click event that sets state of SSstart to item index and opens SS
+  handleDoubleCLick(e) {
+    let className = e.target.className;
+    if (className === "gallery-mainPic") {
+      this.setState({
+        SSstart: 0,
+        showSS: true
+      });
+    } else {
+      let index = parseInt(className[className.length - 1]);
+      this.setState({
+        SSstart: index,
+        showSS: true
+      });
+    }
+  }
+
+  handleItemClick(e, negative) {
+    if (negative) {
+      if (this.state.SSstart === 0) {
+        this.setState({
+          SSstart: this.state.imageList.length - 1
+        });
+      } else {
+        this.setState({
+          SSstart: this.state.SSstart - 1
+        });
+      }
+    } else {
+      if (this.state.SSstart === this.state.imageList.length - 1) {
+        this.setState({
+          SSstart: 0
+        });
+      } else {
+        this.setState({
+          SSstart: this.state.SSstart + 1
+        });
+      }
+    }
+  }
 
   render() {
     let SSclose = () => this.setState({ showSS: false });
@@ -66,9 +106,20 @@ class App extends React.Component {
     return (
       <div>
         <div className="gallery-container">
-          <img src={this.state.imageList[0]} className="gallery-mainPic" />
+          <img
+            src={this.state.imageList[0]}
+            className="gallery-mainPic"
+            onDoubleClick={this.handleDoubleCLick}
+          />
           {this.state.imageList.slice(1, 5).map((item, index) => {
-            return <ListEntry pic={item} key={index} index={index} />;
+            return (
+              <ListEntry
+                pic={item}
+                key={index}
+                index={index}
+                handleDoubleClick={this.handleDoubleCLick}
+              />
+            );
           })}
           <div id="gallery-buttonContainer">
             <Button
@@ -108,6 +159,7 @@ class App extends React.Component {
           imageList={this.state.imageList}
           start={this.state.SSstart}
           transition={this.SStransition}
+          handleItemClick={this.handleItemClick}
         />
         <Save
           show={this.state.showSave}

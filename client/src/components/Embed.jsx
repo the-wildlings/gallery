@@ -154,10 +154,7 @@ export default class Embed extends Component {
                       id="reviews"
                     >
                       {this.state.reviews ? (
-                        <img
-                          className="gallery-check"
-                          src="https://s3-us-west-1.amazonaws.com/sharebnbicons/check+icon.png"
-                        />
+                        <span id="gallery-check">&#10004;</span>
                       ) : null}
                     </div>{" "}
                     Hide the reviews
