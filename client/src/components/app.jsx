@@ -34,7 +34,6 @@ class App extends React.Component {
 
   get() {
     let id = Math.floor(Math.random() * 50) + 1;
-    console.log(id);
     axios
       .get(`/api/photos/${id}`)
       .then(data => {
@@ -184,6 +183,7 @@ class App extends React.Component {
           onHide={shareClose}
           embedClick={this.embedClick}
         />
+        <div id="gallery-dark" />
       </div>
     );
   }
