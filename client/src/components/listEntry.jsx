@@ -6,6 +6,8 @@ const ListEntry = props => {
       src={props.pic}
       className={"gallery-listPic" + props.index}
       onDoubleClick={props.handleDoubleClick}
+      onMouseEnter={props.handleZoom}
+      onMouseLeave={props.handleZoom}
     />
   );
 };

@@ -24,7 +24,7 @@ export default class Slideshow extends Component {
         {...this.props}
         size="xl"
         id="gallery-SSmodalBody"
-        onKeyPress={charCode => console.log(charCode)}
+        onKeyDown={charCode => console.log(charCode)}
       >
         <div id="gallery-SScontainer">
           <img

@@ -19,13 +19,21 @@ class App extends React.Component {
       showShare: false,
       showSave: false,
       showEmbed: false,
-      SSstart: 0
+      SSstart: 0,
+      picArr: [
+        "gallery-mainPic",
+        "gallery-listPic0",
+        "gallery-listPic1",
+        "gallery-listPic2",
+        "gallery-listPic3"
+      ]
     };
     this.get = this.get.bind(this);
     this.embedClick = this.embedClick.bind(this);
     this.SStransition = this.SStransition.bind(this);
     this.handleDoubleCLick = this.handleDoubleCLick.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
+    this.handleZoom = this.handleZoom.bind(this);
   }
 
   componentDidMount() {
@@ -99,6 +107,17 @@ class App extends React.Component {
     }
   }
 
+  handleZoom(e) {
+    this.state.picArr.map(item => {
+      if (e.target.className !== item) {
+        let darkVersion = item + "Dark";
+        document
+          .getElementById(darkVersion)
+          .classList.toggle("gallery-darkened");
+      }
+    });
+  }
+
   render() {
     let SSclose = () => this.setState({ showSS: false });
     let saveClose = () => this.setState({ showSave: false });
@@ -111,6 +130,8 @@ class App extends React.Component {
             src={this.state.imageList[0]}
             className="gallery-mainPic"
             onDoubleClick={this.handleDoubleCLick}
+            onMouseEnter={this.handleZoom}
+            onMouseLeave={this.handleZoom}
           />
           {this.state.imageList.slice(1, 5).map((item, index) => {
             return (
@@ -119,9 +140,15 @@ class App extends React.Component {
                 key={index}
                 index={index}
                 handleDoubleClick={this.handleDoubleCLick}
+                handleZoom={this.handleZoom}
               />
             );
           })}
+          <div id="gallery-mainPicDark" />
+          <div id="gallery-listPic0Dark" />
+          <div id="gallery-listPic1Dark" />
+          <div id="gallery-listPic2Dark" />
+          <div id="gallery-listPic3Dark" />
           <div id="gallery-buttonContainer">
             <Button
               variant="primary"
@@ -183,7 +210,6 @@ class App extends React.Component {
           onHide={shareClose}
           embedClick={this.embedClick}
         />
-        <div id="gallery-dark" />
       </div>
     );
   }
