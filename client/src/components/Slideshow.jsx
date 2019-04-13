@@ -20,12 +20,7 @@ export default class Slideshow extends Component {
   render() {
     // console.log(ArrowKeysReact.events);
     return (
-      <Modal
-        {...this.props}
-        size="xl"
-        id="gallery-SSmodalBody"
-        onKeyDown={charCode => console.log(charCode)}
-      >
+      <Modal {...this.props} size="xl" id="gallery-SSmodalBody">
         <div id="gallery-SScontainer">
           <img
             id="gallery-leftArrow"
