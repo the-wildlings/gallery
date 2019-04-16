@@ -41,7 +41,7 @@ class App extends React.Component {
   }
 
   get() {
-    let id = Math.floor(Math.random() * 50) + 1;
+    let id = Math.floor(Math.random() * 51) + 1;
     axios
       .get(`/api/photos/${id}`)
       .then(data => {
@@ -130,7 +130,7 @@ class App extends React.Component {
             src={this.state.imageList[0]}
             className="gallery-mainPic"
             onDoubleClick={this.handleDoubleCLick}
-            onMouseEnter={this.handleZoom}
+            onMouseOver={this.handleZoom}
             onMouseLeave={this.handleZoom}
           />
           {this.state.imageList.slice(1, 5).map((item, index) => {
