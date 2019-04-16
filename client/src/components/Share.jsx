@@ -48,7 +48,7 @@ export default class Share extends Component {
           />
           <p
             className="gallery-shareOption"
-            onMouseEnter={this.handleMouseEnter}
+            onMouseOver={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
           >
             Facebook
