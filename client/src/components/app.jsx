@@ -1,19 +1,19 @@
-import React from "react";
-import axios from "axios";
-import { Button } from "react-bootstrap";
-import ListEntry from "./listEntry.jsx";
-import Slideshow from "./Slideshow.jsx";
-import Save from "./Save.jsx";
-import Share from "./Share.jsx";
-import Embed from "./Embed.jsx";
+import React from 'react';
+import axios from 'axios';
+import { Button } from 'react-bootstrap';
+import ListEntry from './listEntry.jsx';
+import Slideshow from './Slideshow.jsx';
+import Save from './Save.jsx';
+import Share from './Share.jsx';
+import Embed from './Embed.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       imageList: [],
-      name: "",
-      location: "",
+      name: '',
+      location: '',
       reviews: Math.round(Math.random() * 400) + 50,
       showSS: false,
       showShare: false,
@@ -21,11 +21,11 @@ class App extends React.Component {
       showEmbed: false,
       SSstart: 0,
       picArr: [
-        "gallery-mainPic",
-        "gallery-listPic0",
-        "gallery-listPic1",
-        "gallery-listPic2",
-        "gallery-listPic3"
+        'gallery-mainPic',
+        'gallery-listPic0',
+        'gallery-listPic1',
+        'gallery-listPic2',
+        'gallery-listPic3'
       ]
     };
     this.get = this.get.bind(this);
@@ -44,13 +44,20 @@ class App extends React.Component {
     let id = Math.floor(Math.random() * 51) + 1;
     axios
       .get(`/api/photos/${id}`)
-      .then(data => {
-        this.setState({
-          imageList: data.data[0].urls,
-          location: data.data[0].location + ", CA, United States",
-          name: data.data[0].title
-        });
-      })
+      .then(
+        data => {
+          // let urls = data.data[0].urls
+          //   .substring(1, data.data[0].urls.length - 1)
+          //   .split(',')
+          //   .map(url => url.substring(1, url.length - 1));
+          this.setState({
+            imageList: data.data[0].urls,
+            location: data.data[0].location + ', CA, United States',
+            name: data.data[0].title
+          });
+        },
+        () => console.log(this.state.imageList)
+      )
       .catch(err => console.error(err));
   }
 
@@ -69,7 +76,7 @@ class App extends React.Component {
 
   handleDoubleCLick(e) {
     let className = e.target.className;
-    if (className === "gallery-mainPic") {
+    if (className === 'gallery-mainPic') {
       this.setState({
         SSstart: 0,
         showSS: true
@@ -110,10 +117,10 @@ class App extends React.Component {
   handleZoom(e) {
     this.state.picArr.map(item => {
       if (e.target.className !== item) {
-        let darkVersion = item + "Dark";
+        let darkVersion = item + 'Dark';
         document
           .getElementById(darkVersion)
-          .classList.toggle("gallery-darkened");
+          .classList.toggle('gallery-darkened');
       }
     });
   }

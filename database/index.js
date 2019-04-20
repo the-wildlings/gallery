@@ -5,15 +5,15 @@ mongoose.connect('mongodb://localhost/gallery', {
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'Connection error'))
-db.once('open', function () {
-  console.log('Database connection established')
+db.on('error', console.error.bind(console, 'Connection error'));
+db.once('open', function() {
+  console.log('Database connection established');
 });
 
 let GallerySchema = mongoose.Schema({
   id: {
     type: Number,
-    unique: true,
+    unique: true
   },
   location: {
     type: String
@@ -24,7 +24,7 @@ let GallerySchema = mongoose.Schema({
   urls: {
     type: [String]
   }
-})
+});
 
 let Gallery = mongoose.model('Gallery', GallerySchema);
 
