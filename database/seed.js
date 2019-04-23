@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 // const initData = require('./seed.json')
 const fs = require('fs');
-const writerStream = fs.createWriteStream('data.json');
+const writerStream = fs.createWriteStream('data.csv');
 // const readerStream = fs.createReadStream('data.txt');
 // const initData = [];
 const startTime = Date.now();
 console.log(startTime);
-function writeOneMillion(writerStream, data, encoding, callback) {
-  let i = 1e7;
+function writeOneMillion(qty, writerStream, data, encoding, callback) {
+  let i = qty;
   write();
   function write() {
     let ok = true;
@@ -17,20 +17,20 @@ function writeOneMillion(writerStream, data, encoding, callback) {
       let myData = data();
       let obj = {
         id: i,
-        title: myData.title,
-        location: myData.location,
-        // urls: '"[' + myData.urls + ']"'
-        urls: myData.urls
+        title: `"${myData.title}"`,
+        location: `"${myData.location}"`,
+        urls: '"{' + myData.urls + '}"'
+        // urls: myData.urls
       };
-      //create a str joining all the values in the obj in one line
-      // let str = Object.values(obj).join(',') + '\n';
+      // create a str joining all the values in the obj in one line
+      let str = Object.values(obj).join(',') + '\n';
       // let temp = Object.values(obj);
       // let str = temp.substring(1, temp.length - 1) + '\n';
       //create the header for the csv file at first run
-      // if (i === 1e7) {
-      //   writerStream.write('id, title, location, urls \n', 'UTF8', callback);
-      // }
-      str = JSON.stringify(obj);
+      if (i === qty) {
+        writerStream.write('id, title, location, urls \n', 'UTF8', callback);
+      }
+      // str = JSON.stringify(obj);
       i -= 1;
       if (i === 0) {
         writerStream.write(str, encoding, callback);
@@ -123,7 +123,7 @@ let data = () => {
   };
 };
 
-writeOneMillion(writerStream, data, 'UTF8', () =>
+writeOneMillion(1e7, writerStream, data, 'UTF8', () =>
   console.log('write stream done')
 );
 
