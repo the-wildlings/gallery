@@ -1,4 +1,5 @@
-const db = require('../database/index.js');
+// const db = require('../database/index.js'); //mongodb
+const db = require('../database/Model.js');
 
 const controller = {
   get: (req, res) => {
