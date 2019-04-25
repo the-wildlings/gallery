@@ -3,41 +3,43 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 // const initData = require('./seed.json')
 const fs = require('fs');
-const writerStream = fs.createWriteStream('data.csv');
+const writerStream = fs.createWriteStream('test.csv');
 // const readerStream = fs.createReadStream('data.txt');
 // const initData = [];
 const startTime = Date.now();
 console.log(startTime);
 function writeOneMillion(qty, writerStream, data, encoding, callback) {
-  let i = qty;
+  let i = 1;
   write();
   function write() {
     let ok = true;
     do {
-      let myData = data();
+      // let myData = data();
       let obj = {
         id: i,
-        title: `"${myData.title}"`,
-        location: `"${myData.location}"`,
-        urls: '"{' + myData.urls + '}"'
-        // urls: myData.urls
+        prop_id: Math.floor(Math.random() * 1e7) + 1,
+        // title: `"${myData.title}"`,
+        // location: `"${myData.location}"`,
+        // urls: '"{' + myData.urls + '}"'
+        urls: 'https://loremflickr.com/720/640/house?random=1'
       };
       // create a str joining all the values in the obj in one line
       let str = Object.values(obj).join(',') + '\n';
       // let temp = Object.values(obj);
       // let str = temp.substring(1, temp.length - 1) + '\n';
       //create the header for the csv file at first run
-      if (i === qty) {
-        writerStream.write('id, title, location, urls \n', 'UTF8', callback);
+      if (i === 1) {
+        // writerStream.write('id, title, location, urls \n', 'UTF8', callback);
+        writerStream.write('id, prop_id, urls \n', 'UTF8');
       }
       // str = JSON.stringify(obj);
-      i -= 1;
-      if (i === 0) {
-        writerStream.write(str, encoding, callback);
+      i += 1;
+      if (i === qty) {
+        writerStream.write(str, callback);
       } else {
-        ok = writerStream.write(str, encoding);
+        ok = writerStream.write(str);
       }
-    } while (i > 0 && ok);
+    } while (i <= qty && ok);
     if (i > 0) {
       writerStream.once('drain', write);
     }
@@ -46,58 +48,58 @@ function writeOneMillion(qty, writerStream, data, encoding, callback) {
 
 //function that creates random data info and random amount of pictures
 let data = () => {
-  const noun = [
-    'Home',
-    'Flat',
-    'Apartment',
-    'Suite',
-    'Loft',
-    'Cottage',
-    'Townhouse',
-    'Condo',
-    'Bungalow',
-    'Retreat',
-    'House',
-    'Castle',
-    'Mansion'
-  ];
-  const adjective = [
-    '',
-    'Beautiful',
-    'Cozy',
-    'Convenient',
-    'Magical',
-    'Private',
-    'Vintage',
-    'Charming',
-    'Themed',
-    'Modern',
-    'Luxurious',
-    'Getaway',
-    'Quaint',
-    'Hilltop',
-    'Scenic',
-    'Picturesque',
-    'Comfy'
-  ];
-  const locations = [
-    'Los Angeles',
-    'Glendale',
-    'Marina del Rey',
-    'Hollywood',
-    'Hawthorne',
-    'Pasadena',
-    'Inglewood',
-    'Compton',
-    'Koreatown',
-    'Westchester',
-    'Bel-Air',
-    'Beverley Hills',
-    'West LA',
-    'Santa Monica',
-    'Venice',
-    'Malibu'
-  ];
+  // const noun = [
+  //   'Home',
+  //   'Flat',
+  //   'Apartment',
+  //   'Suite',
+  //   'Loft',
+  //   'Cottage',
+  //   'Townhouse',
+  //   'Condo',
+  //   'Bungalow',
+  //   'Retreat',
+  //   'House',
+  //   'Castle',
+  //   'Mansion'
+  // ];
+  // const adjective = [
+  //   '',
+  //   'Beautiful',
+  //   'Cozy',
+  //   'Convenient',
+  //   'Magical',
+  //   'Private',
+  //   'Vintage',
+  //   'Charming',
+  //   'Themed',
+  //   'Modern',
+  //   'Luxurious',
+  //   'Getaway',
+  //   'Quaint',
+  //   'Hilltop',
+  //   'Scenic',
+  //   'Picturesque',
+  //   'Comfy'
+  // ];
+  // const locations = [
+  //   'Los Angeles',
+  //   'Glendale',
+  //   'Marina del Rey',
+  //   'Hollywood',
+  //   'Hawthorne',
+  //   'Pasadena',
+  //   'Inglewood',
+  //   'Compton',
+  //   'Koreatown',
+  //   'Westchester',
+  //   'Bel-Air',
+  //   'Beverley Hills',
+  //   'West LA',
+  //   'Santa Monica',
+  //   'Venice',
+  //   'Malibu'
+  // ];
   const urls = [
     // `\'https://loremflickr.com/720/640/house\'`,
     // `\'https://loremflickr.com/320/240/house\'`,
@@ -114,16 +116,16 @@ let data = () => {
   ];
 
   return {
-    title:
-      adjective[Math.floor(Math.random() * 17)] +
-      ' ' +
-      noun[Math.floor(Math.random() * 13)],
-    location: locations[Math.floor(Math.random() * 17)],
+    // title:
+    //   adjective[Math.floor(Math.random() * 17)] +
+    //   ' ' +
+    //   noun[Math.floor(Math.random() * 13)],
+    // location: locations[Math.floor(Math.random() * 17)],
     urls: urls.slice(0, Math.floor(Math.random() * 6) + 5)
   };
 };
 
-writeOneMillion(1e7, writerStream, data, 'UTF8', () =>
+writeOneMillion(10, writerStream, data, 'UTF8', () =>
   console.log('write stream done')
 );
 

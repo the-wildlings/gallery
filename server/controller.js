@@ -19,8 +19,7 @@ const controller = {
   },
 
   post: (req, res) => {
-    let { id, title, location, urls } = req.body;
-    db.insertMany({ id, urls, title, location })
+    db.insertMany(req.body)
       .then(() => res.status(201).send('posted'))
       .catch(err => console.error(err));
   },
@@ -38,6 +37,13 @@ const controller = {
       .then(() => res.status(202).send('updated'))
       .catch(err => console.error(err));
   }
+
+  // getPropId: (req, res) => {
+  //   let { prop_id } = req.params;
+  //   db.find({ prop_id: prop_id })
+  //     .then(data => res.status(200).send(data))
+  //     .catch(err => console.error(err));
+  // }
 };
 
 module.exports = controller;

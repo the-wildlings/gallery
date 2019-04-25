@@ -15,15 +15,17 @@ let GallerySchema = mongoose.Schema({
     type: Number,
     unique: true
   },
-  location: {
-    type: String
-  },
-  title: {
-    type: String
-  },
-  urls: {
-    type: [String]
-  }
+  // location: {
+  //   type: String
+  // },
+  // title: {
+  //   type: String
+  // },
+  prop_id: Number,
+  // urls: {
+  //   type: [String]
+  // }
+  urls: String
 });
 
 let Gallery = mongoose.model('Gallery', GallerySchema);
